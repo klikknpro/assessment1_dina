@@ -2,29 +2,25 @@ const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'
 const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 const tens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-const convertHundredMillions = (num) => {
-  // 999.999.999
-  if (num >= 100000000) {
-    return convertHundreds(Math.floor(num / 1000000)) + ' ' + 'million';
-  }
-};
-
-const convertHundreds = (num) => {
-  if (num % 100 === 0) return ones[num.toString()[0]] + ' ' + 'hundred';
-
-  if (num % 100 >= 10 && num % 100 <= 19) {
-    return ones[num.toString()[0]] + ' ' + 'hundred' + ' ' + convertTeens(num % 100);
-  }
-};
-
-const convertTeens = (num) => {
-  return teens[num.toString()[1]];
-};
+// 980.565.125
 
 function convertLogic(num) {
-  const phrase = [];
-  phrase.push(convertHundredMillions(num));
-  return phrase.join(' ');
+  const input = num.toString();
+
+  const digits = {
+    hundredMillion: input.length === 9 ? input[input.length - 9] : undefined,
+    tenMillion: input.length >= 8 ? input[input.length - 8] : undefined,
+    million: input.length >= 7 ? input[input.length - 7] : undefined,
+    hundredThousand: input.length >= 6 ? input[input.length - 6] : undefined,
+    tenThousand: input.length >= 5 ? input[input.length - 5] : undefined,
+    thousand: input.length >= 4 ? input[input.length - 4] : undefined,
+    hundred: input.length >= 3 ? input[input.length - 3] : undefined,
+    ten: input.length >= 2 ? input[input.length - 2] : undefined,
+    one: input.length >= 1 ? input[input.length - 1] : undefined,
+  };
+
+  console.log(digits);
+  return 'testing';
 }
 
 export default convertLogic;
@@ -32,4 +28,11 @@ export default convertLogic;
 /*
 999.999.999
 nine hundred ninety-nine million * nine hundred ninety-nine thousand * nine hundred and ninety-nine
+*/
+
+/*
+input -> object (number)
+business logic test (jest)
++ testing-library
+!!! negativ, tort szamok
 */

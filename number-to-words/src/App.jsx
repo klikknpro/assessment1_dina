@@ -10,7 +10,7 @@ function App() {
     e.preventDefault();
     const result = convertLogic(inputValue);
     setPhrase(result);
-    setInputValue('');
+    // setInputValue('');
   };
 
   return (

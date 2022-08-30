@@ -1,8 +1,9 @@
 # Arabic number conversion tool
 
-Create a web-based solution that converts numeric input into the English phrase of that number. 
+Create a web-based solution that converts numeric input into the English phrase of that number.
 
 For example:
+
 <pre>
 7       === seven
 42      === forty-two
@@ -17,6 +18,7 @@ For example:
 Note: Numbers greater than 100 may include the word "and" between the hundreds figure and the rest of the number. Figure out the pattern and implement the solution accordingly.
 
 Treat this task like a project to create a real-life application, focus on other aspects too, not just the code:
+
 - Fork this project.
 - Use the best stack matching the simplicity of the task.
 - Don't use external libraries for the conversion.
@@ -27,3 +29,6 @@ Treat this task like a project to create a real-life application, focus on other
 - (Optional) Try to support British English counting where numbers between 1000 and 2000 are said out using "hundreds". E.g. 1999 === nineteen hundred and ninety-nine
 
 Thank you for your time and happy coding! 🧑‍💻
+
+- 21-99
+  - twenty-one, ninety-nine

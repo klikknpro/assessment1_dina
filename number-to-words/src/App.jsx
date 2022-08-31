@@ -7,7 +7,6 @@ function App() {
   const [phrase, setPhrase] = useState('');
   const [num, setNum] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const [hint, setHint] = useState('Type at least one number');
 
   const validate = (e) => {
     setInputValue(e.target.value);
@@ -24,27 +23,32 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const result = convertLogic(inputValue);
-    setNum(inputValue);
     setPhrase(result);
+    setNum(inputValue);
   };
 
   return (
     <div>
-      <Container>
+      <Container className='w-75'>
         <Form onSubmit={handleSubmit}>
           <Form.Group>
-            <Form.Label>Number to convert</Form.Label>
+            <Form.Label className='fs-5'>Arabic number conversion tool</Form.Label>
+            <p>Enter a number to convert into it's English phrase</p>
             <Form.Control type='number' onChange={(e) => validate(e)} value={inputValue}></Form.Control>
-            <Form.Text className='text-muted'>{hint}</Form.Text>
+            <Form.Text className='text-muted'>{disabled && 'Number must be an integer between 1 and 999999999'}</Form.Text>
           </Form.Group>
-          <Button disabled={disabled} type='submit'>
+          <Button className='m-4' disabled={disabled} type='submit' variant='success'>
             Convert
           </Button>
         </Form>
-        <p>Your number as you typed it:</p>
-        <h1>{phrase && num}</h1>
-        <p>Your number as you'd say it:</p>
-        <h1>{phrase}</h1>
+        {phrase && (
+          <div>
+            <p>Your number as you typed it:</p>
+            <h1>{num}</h1>
+            <p>Your number as you'd say it:</p>
+            <h1>{phrase}</h1>
+          </div>
+        )}
       </Container>
     </div>
   );

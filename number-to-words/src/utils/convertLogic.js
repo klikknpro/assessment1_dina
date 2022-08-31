@@ -78,7 +78,7 @@ function convertLogic(num) {
   if (digits.ten === 0 && digits.one >= 1) phrase.push(ones[digits.one]);
   if (digits.ten === undefined && digits.one >= 1) phrase.push(ones[digits.one]);
 
-  const result = phrase.join(' ').replace(' - ', '-');
+  const result = phrase.join(' ').replaceAll(' - ', '-');
 
   return result;
 }
@@ -86,9 +86,9 @@ function convertLogic(num) {
 export default convertLogic;
 
 /*
-input -> object (number)
+[•] input -> object (number)
 business logic test (jest)
 + testing-library
-!!! negativ, tort szamok
-! must not start with 0
+[•] !!! negativ, tort szamok
+[•] ! must not start with 0
 */

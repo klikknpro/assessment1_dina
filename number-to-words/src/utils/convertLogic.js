@@ -2,9 +2,8 @@ const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'
 const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
 const tens = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-function convertLogic(num) {
+function convertLogic(num, language) {
   const input = num.toString();
-
   const phrase = [];
 
   const digits = {
@@ -18,6 +17,27 @@ function convertLogic(num) {
     ten: input.length >= 2 ? parseInt(input[input.length - 2]) : undefined,
     one: input.length >= 1 ? parseInt(input[input.length - 1]) : undefined,
   };
+
+  // british 1100 - 1999
+  const isBritish = language === 'british' && num >= 1100 && num <= 1999;
+  if (isBritish) {
+    phrase.push(teens[digits.hundred], 'hundred');
+    if (digits.ten >= 1 || digits.one >= 1) {
+      phrase.push('and');
+      if (digits.ten === 1) phrase.push(teens[digits.one]);
+
+      if (digits.ten >= 2) {
+        phrase.push(tens[digits.ten - 2]);
+        if (digits.one >= 1) phrase.push('-');
+      }
+
+      if (digits.one >= 1 && digits.ten >= 2) phrase.push(ones[digits.one]);
+      if (digits.ten === 0 && digits.one >= 1) phrase.push(ones[digits.one]);
+      if (digits.ten === undefined && digits.one >= 1) phrase.push(ones[digits.one]);
+    }
+
+    return phrase.join(' ').replaceAll(' - ', '-');
+  }
 
   // XXX.000.000
   if (digits.hundredMillion) {

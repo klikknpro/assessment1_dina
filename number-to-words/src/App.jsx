@@ -7,6 +7,11 @@ function App() {
   const [phrase, setPhrase] = useState('');
   const [num, setNum] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [language, setLanguage] = useState('default');
+
+  const handleLanguage = (e) => {
+    setLanguage(e.target.value);
+  };
 
   const validate = (e) => {
     setInputValue(e.target.value);
@@ -23,7 +28,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const result = convertLogic(inputValue);
+    const result = convertLogic(inputValue, language);
     setPhrase(result);
     setNum(inputValue);
   };
@@ -32,6 +37,11 @@ function App() {
     <div>
       <Container className='w-75'>
         <Form onSubmit={handleSubmit}>
+          <Form.Select onChange={(e) => handleLanguage(e)} size='sm' className='w-25'>
+            <option value='default'>American (default)</option>
+            <option value='british'>British</option>
+          </Form.Select>
+          <p className='text-muted w-25'>{language === 'british' && 'For numbers between 1100 and 1999'}</p>
           <Form.Group>
             <Form.Label className='fs-5'>Arabic number conversion tool</Form.Label>
             <p>Enter a number to convert into it's English phrase</p>

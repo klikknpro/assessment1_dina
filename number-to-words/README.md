@@ -1,31 +1,53 @@
-# Arabic number conversion tool
+# Arabic number conversion tool [JS/React]
 
-Create a web-based solution that converts numeric input into the English phrase of that number.
+## My solution to the first assessment ;)
 
-For example:
+A web-based solution that converts numeric input into the English phrase of that number.
 
-<pre>
-7       === seven
-42      === forty-two
-1999    === one thousand nine hundred and ninety-nine
-2001    === two thousand and one
-17999   === seventeen thousand nine hundred and ninety-nine
-100001  === one hundred thousand and one
-342251  === three hundred and forty-two thousand two hundred and fifty-one
-1300420 === one million three hundred thousand four hundred and twenty
-</pre>
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Examples](#examples)
+- [Setup requirements](#setup-requirements)
+- [How to start](#how-to-start)
 
-Note: Numbers greater than 100 may include the word "and" between the hundreds figure and the rest of the number. Figure out the pattern and implement the solution accordingly.
+## Features
 
-Treat this task like a project to create a real-life application, focus on other aspects too, not just the code:
+- created with _Vite_ using the react template
+- Bootstrap 5 / _React-Bootstrap_ to give basic, but intuitive style to the app
+- test framework: <a href="https://vitest.dev/">Vitest</a>
+- - <a href="https://testing-library.com/">Testing Library</a> to test the DOM
 
-- Fork this project.
-- Use the best stack matching the simplicity of the task.
-- Don't use external libraries for the conversion.
-- Make the solution pleasant to look at and user friendly in as many aspects as you can.
-- Commit the important milestones and not just the final result.
-- Don't forget to write tests. We expect the tests to check also the examples above.
-- Try to support numbers as high as you can.
-- (Optional) Try to support British English counting where numbers between 1000 and 2000 are said out using "hundreds". E.g. 1999 === nineteen hundred and ninety-nine
+## Examples
 
-Thank you for your time and happy coding! 🧑‍💻
+42 === forty-two \
+1999 === one thousand nine hundred and ninety-nine \
+2001 === two thousand and one
+
+## Setup requirements
+
+- Web browser
+- Visual Studio Code
+- Node.js
+
+## How to start
+
+1. Clone the repository and open with Visual Studio Code
+
+2. branch -> assessment/klikknpro
+
+3. change directory -> number-to-words
+
+4. npm install
+
+5. npm run dev [to start localhost]
+
+6. npm run test [to run render and unit tests] \
+   npm run coverage [to see test coverage]
+
+---
+
+## Screenshots
+
+<img src="src/img/Screenshot 2022-09-02 at 19.21.34 (2).png" width="800"/>
+<img src="src/img/Screenshot 2022-09-02 at 19.22.41 (2).png" width="800"/>
+<img src="src/img/Screenshot 2022-09-02 at 19.23.38 (2).png" width="800"/>

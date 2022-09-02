@@ -84,11 +84,3 @@ function convertLogic(num) {
 }
 
 export default convertLogic;
-
-/*
-[•] input -> object (number)
-business logic test (jest)
-+ testing-library
-[•] !!! negativ, tort szamok
-[•] ! must not start with 0
-*/

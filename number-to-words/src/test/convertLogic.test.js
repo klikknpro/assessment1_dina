@@ -60,3 +60,41 @@ describe('logic test with valid numbers', () => {
     expect(result).toBe('nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine');
   });
 });
+
+describe('logic test with British numbers', () => {
+  it('1100 should return "eleven hundred"', () => {
+    // given
+    const language = 'british';
+    // when
+    const result = convertLogic(1100, language);
+    // then
+    expect(result).toBe('eleven hundred');
+  });
+
+  it('1203 should return "twelve hundred and three"', () => {
+    // given
+    const language = 'british';
+    // when
+    const result = convertLogic(1203, language);
+    // then
+    expect(result).toBe('twelve hundred and three');
+  });
+
+  it('1980 should return "nineteen hundred and eighty"', () => {
+    // given
+    const language = 'british';
+    // when
+    const result = convertLogic(1980, language);
+    // then
+    expect(result).toBe('nineteen hundred and eighty');
+  });
+
+  it('1999 should return "nineteen hundred and ninety-nine"', () => {
+    // given
+    const language = 'british';
+    // when
+    const result = convertLogic(1999, language);
+    // then
+    expect(result).toBe('nineteen hundred and ninety-nine');
+  });
+});

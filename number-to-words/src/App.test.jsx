@@ -133,3 +133,31 @@ describe('render results', () => {
     expect(screen.getByText('two thousand and one')).toBeInTheDocument();
   });
 });
+
+describe('render results of British option', () => {
+  it('the converted number should render (as a number)', async () => {
+    render(<App />);
+
+    const input = screen.getByLabelText('input');
+    const button = screen.getByRole('button');
+
+    await userEvent.selectOptions(screen.getByRole('combobox'), 'british');
+    await userEvent.type(input, '1999');
+    await userEvent.click(button);
+
+    expect(screen.getByText('1999')).toBeInTheDocument();
+  });
+
+  it('the converted British English phrase should render', async () => {
+    render(<App />);
+
+    const input = screen.getByLabelText('input');
+    const button = screen.getByRole('button');
+
+    await userEvent.selectOptions(screen.getByRole('combobox'), 'british');
+    await userEvent.type(input, '1999');
+    await userEvent.click(button);
+
+    expect(screen.getByText('nineteen hundred and ninety-nine')).toBeInTheDocument();
+  });
+});

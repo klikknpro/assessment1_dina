@@ -45,7 +45,7 @@ function Home() {
           </Col>
         ))}
       </Row>
-      <Row>
+      <Row className='text-white'>
         <Col>
           <Button onClick={handlePrevious}>Previous</Button>
         </Col>

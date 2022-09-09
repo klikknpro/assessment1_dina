@@ -14,7 +14,7 @@ function UserItem({ first_name, last_name, created_at, status, id }: User) {
   };
 
   return (
-    <Card className='h-100'>
+    <Card className={userStatus ? 'h-100' : 'h-100 text-decoration-line-through'}>
       <Card.Body className='d-flex flex-column'>
         <Card.Title>
           {first_name} {last_name}

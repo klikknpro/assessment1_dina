@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User } from '../utils/interfaces';
-import { getUsers } from '../api/getUsers';
+import { getUsers } from '../api/diNaUsers';
 import { Col, Container, Row } from 'react-bootstrap';
 import UserItem from '../components/UserItem';
 
@@ -23,7 +23,7 @@ function Home() {
 
   return (
     <Container>
-      <Row>
+      <Row xs={1} s={2} md={3} lg={4} className='g-3'>
         {userList.map((user) => (
           <Col key={user.id}>
             <UserItem {...user} />

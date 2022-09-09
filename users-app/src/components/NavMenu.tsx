@@ -4,26 +4,24 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 
 function NavMenu() {
   return (
-    <div>
-      <Navbar expand='sm' className='bg-secondary shadow mb-4' variant='dark' sticky='top'>
-        <Container>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-          <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav>
-              <Nav.Link as={NavLink} to='/'>
-                Home
-              </Nav.Link>
-              <Nav.Link as={NavLink} to='/new'>
-                New
-              </Nav.Link>
-              <Nav.Link as={NavLink} to='/edit'>
-                Edit
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    <Navbar expand='sm' className='bg-secondary shadow mb-4' variant='dark' sticky='top'>
+      <Container>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav>
+            <Nav.Link as={NavLink} to='/'>
+              Home
+            </Nav.Link>
+            <Nav.Link as={NavLink} to='/new'>
+              New
+            </Nav.Link>
+            <Nav.Link as={NavLink} to='/edit'>
+              Edit
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 

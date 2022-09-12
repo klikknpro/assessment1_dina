@@ -25,3 +25,17 @@ export async function changeUserStatus(status: string, id: number) {
     alert(err);
   }
 }
+
+export async function createUser(firstName: string, lastName: string) {
+  try {
+    const response = await http.post<User>(`https://assessment-users-backend.herokuapp.com/users.json`, {
+      first_name: firstName,
+      last_name: lastName,
+      status: 'active',
+    });
+
+    if (response.data !== undefined) return response.data;
+  } catch (err) {
+    alert(err);
+  }
+}

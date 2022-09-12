@@ -38,7 +38,7 @@ function Home() {
 
   return (
     <Container>
-      <Row xs={1} s={2} md={3} lg={4} className='g-3'>
+      <Row xs={1} s={2} md={3} lg={4} className='g-3 mb-3'>
         {tenUsers.map((user) => (
           <Col key={user.id}>
             <UserItem {...user} />

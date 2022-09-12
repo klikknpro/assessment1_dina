@@ -7,3 +7,9 @@ export interface User {
   updated_at: string;
   url: string;
 }
+
+export interface CreatedUser {
+  firstName?: string | string[];
+  lastName?: string | string[];
+  status?: string | string[];
+}

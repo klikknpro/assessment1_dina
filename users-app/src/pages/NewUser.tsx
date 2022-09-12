@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { createUser } from '../api/diNaUsers';
-import { User } from '../utils/interfaces';
+import { CreatedUser, User } from '../utils/interfaces';
 
 function NewUser() {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [disabled, setDisabled] = useState<boolean>(true);
-  const [newUser, setNewUser] = useState<User | undefined>(undefined);
+  const [newUser, setNewUser] = useState<CreatedUser | undefined>(undefined);
 
   const validate = (input: string): boolean => {
     const format = /[!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?]/;
     if (input.match(format)) return false;
-    if (input.length < 3) return false;
     return true;
-  };
-
-  const changeLastName = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (newUser) setNewUser(undefined);
-    setLastName(event.target.value);
-    if (!validate(event.target.value)) return setDisabled(true);
-    return setDisabled(false);
   };
 
   const changeFirstName = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (newUser) setNewUser(undefined);
     setFirstName(event.target.value);
+    if (!validate(event.target.value)) return setDisabled(true);
+    return setDisabled(false);
+  };
+
+  const changeLastName = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (newUser) setNewUser(undefined);
+    setLastName(event.target.value);
     if (!validate(event.target.value)) return setDisabled(true);
     return setDisabled(false);
   };
@@ -36,6 +35,7 @@ function NewUser() {
     setNewUser(freshUser);
     setFirstName('');
     setLastName('');
+    setDisabled(true);
   };
 
   return (
@@ -62,12 +62,12 @@ function NewUser() {
             required
           ></Form.Control>
         </Form.Group>
-        <Button className='m-4' disabled={disabled} type='submit' variant='success'>
+        <Button className='m-4' disabled={disabled} type='submit' variant='outline-success'>
           Create
         </Button>
         {newUser && (
           <p className='text-white'>
-            Congrats! {newUser.first_name} {newUser.last_name} has been created
+            Congrats! {newUser.firstName} {newUser.lastName} has been created
           </p>
         )}
       </Form>

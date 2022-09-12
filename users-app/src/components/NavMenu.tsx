@@ -15,9 +15,9 @@ function NavMenu() {
             <Nav.Link as={NavLink} to='/new'>
               New
             </Nav.Link>
-            <Nav.Link as={NavLink} to='/edit'>
+            {/* <Nav.Link as={NavLink} to='/edit:id'>
               Edit
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

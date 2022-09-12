@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { User } from '../utils/interfaces';
 import { getUsers } from '../api/diNaUsers';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row, Button, Spinner } from 'react-bootstrap';
 import UserItem from '../components/UserItem';
 
 function Home() {
@@ -38,24 +38,38 @@ function Home() {
 
   return (
     <Container>
-      <Row xs={1} s={2} md={3} lg={4} className='g-3 mb-3'>
-        {tenUsers.map((user) => (
-          <Col key={user.id}>
-            <UserItem {...user} />
+      {userList.length === 0 ? (
+        <Row>
+          <Col className='d-flex justify-content-center'>
+            <Spinner animation='border' variant='warning' />
           </Col>
-        ))}
-      </Row>
-      <Row className='text-white'>
-        <Col>
-          <Button onClick={handlePrevious}>Previous</Button>
-        </Col>
-        <Col>
-          {indexOfFirst} - {indexOfFirst + 10} of {userList.length}
-        </Col>
-        <Col>
-          <Button onClick={handleNext}>Next</Button>
-        </Col>
-      </Row>
+        </Row>
+      ) : (
+        <>
+          <Row xs={1} s={2} md={3} lg={4} className='g-3 mb-3'>
+            {tenUsers.map((user) => (
+              <Col key={user.id}>
+                <UserItem {...user} />
+              </Col>
+            ))}
+          </Row>
+          <Row className='text-white'>
+            <Col className='d-flex justify-content-end'>
+              <Button variant='outline-warning' onClick={handlePrevious}>
+                Previous
+              </Button>
+            </Col>
+            <Col className='d-flex justify-content-center align-items-center'>
+              {indexOfFirst} - {indexOfFirst + 10} of {userList.length}
+            </Col>
+            <Col className='d-flex justify-content-start'>
+              <Button variant='outline-warning' onClick={handleNext}>
+                Next
+              </Button>
+            </Col>
+          </Row>
+        </>
+      )}
     </Container>
   );
 }

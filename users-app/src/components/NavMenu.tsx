@@ -13,11 +13,8 @@ function NavMenu() {
               Home
             </Nav.Link>
             <Nav.Link as={NavLink} to='/new'>
-              New
+              Create
             </Nav.Link>
-            {/* <Nav.Link as={NavLink} to='/edit:id'>
-              Edit
-            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Button, Container, Form } from 'react-bootstrap';
 import { getUser, editUserNames } from '../api/diNaUsers';
-import { FormData } from '../utils/interfaces';
+import { FormData, FormError, User } from '../utils/interfaces';
 
 function ModifyUser() {
-  const [placeholderFirstName, setPlaceholderFirstName] = useState<string | undefined>('');
-  const [placeholderLastName, setPlaceholderLastName] = useState<string | undefined>('');
+  const [placeholderName, setPlaceholderName] = useState<User | undefined>(undefined);
+  const [serverError, setServerError] = useState<FormError | undefined>(undefined);
   const [done, setDone] = useState<boolean>(false);
 
   const { id } = useParams();
@@ -25,9 +25,14 @@ function ModifyUser() {
   const modify = async (data: FormData) => {
     if (!id) return alert('Missing id');
     const modifiedUser = await editUserNames(data.firstName, data.lastName, id);
-    setPlaceholderFirstName(modifiedUser?.first_name);
-    setPlaceholderLastName(modifiedUser?.last_name);
-    setDone(true);
+    // eslint-disable-next-line no-prototype-builtins
+    if (modifiedUser.hasOwnProperty('id')) {
+      setPlaceholderName(modifiedUser as User);
+      setServerError(undefined);
+      setDone(true);
+    } else {
+      setServerError(modifiedUser as FormError);
+    }
   };
 
   useEffect(() => {
@@ -35,10 +40,7 @@ function ModifyUser() {
 
     async function fetchUser() {
       const response = await getUser(id);
-      if (response && !ignore) {
-        setPlaceholderFirstName(response.data.first_name);
-        setPlaceholderLastName(response.data.last_name);
-      }
+      if (response && !ignore) setPlaceholderName(response as User);
     }
     fetchUser();
 
@@ -54,25 +56,37 @@ function ModifyUser() {
         <h2 className='text-white mb-4'>Modify the user profile</h2>
         <Form.Group className='mb-3'>
           <Form.Label className='text-white'>
-            Current first name: <span className='text-wrap bg-success badge fs-6'>{placeholderFirstName}</span>
+            Current first name: <span className='text-wrap bg-success badge fs-6'>{placeholderName?.first_name}</span>
           </Form.Label>
           <Form.Control
-            {...register('firstName')}
-            placeholder='First name'
+            {...register('firstName', { required: 'New first name is required' })}
+            placeholder='New first name'
             aria-label='edit-first-name-input'
             type='text'
           ></Form.Control>
+          <p className='text-white mt-1 text-muted'>{errors.firstName?.message}</p>
+          {serverError && serverError.first_name ? (
+            <p className='text-white mt-1 text-muted'>{serverError.first_name[0]}</p>
+          ) : (
+            <></>
+          )}
         </Form.Group>
         <Form.Group className='mb-3'>
           <Form.Label className='text-white'>
-            Current last name: <span className='text-wrap bg-success badge fs-6'>{placeholderLastName}</span>
+            Current last name: <span className='text-wrap bg-success badge fs-6'>{placeholderName?.last_name}</span>
           </Form.Label>
           <Form.Control
-            {...register('lastName')}
-            placeholder='Last name'
+            {...register('lastName', { required: 'New last name is required' })}
+            placeholder='New last name'
             aria-label='edit-last-name-input'
             type='text'
           ></Form.Control>
+          <p className='text-white mt-1 text-muted'>{errors.lastName?.message}</p>
+          {serverError && serverError.last_name ? (
+            <p className='text-white mt-1 text-muted'>{serverError.last_name[0]}</p>
+          ) : (
+            <></>
+          )}
         </Form.Group>
         <Button className='m-4' type='submit' variant='outline-warning'>
           Modify
@@ -84,3 +98,7 @@ function ModifyUser() {
 }
 
 export default ModifyUser;
+
+/*
+, { required: 'New first name is required' }
+*/

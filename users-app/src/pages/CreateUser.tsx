@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { createUser } from '../api/diNaUsers';
-import { User, FormData } from '../utils/interfaces';
+import { User, FormData, FormError } from '../utils/interfaces';
 
 function CreateUser() {
   const {
@@ -18,12 +18,19 @@ function CreateUser() {
   });
 
   const [newUser, setNewUser] = useState<User | undefined>(undefined);
+  const [serverError, setServerError] = useState<FormError | undefined>(undefined);
   // watch() re-renders after every keystroke, kinda like a useState() controlled input
   // const firstName = watch('firstName');
 
   const submit = async (data: FormData) => {
     const freshUser = await createUser(data.firstName, data.lastName);
-    setNewUser(freshUser);
+    // eslint-disable-next-line no-prototype-builtins
+    if (freshUser.hasOwnProperty('id')) {
+      setNewUser(freshUser as User);
+      setServerError(undefined);
+    } else {
+      setServerError(freshUser as FormError);
+    }
   };
 
   return (
@@ -39,6 +46,11 @@ function CreateUser() {
             placeholder='First name'
           ></Form.Control>
           <p className='text-white mt-1 text-muted'>{errors.firstName?.message}</p>
+          {serverError && serverError.first_name ? (
+            <p className='text-white mt-1 text-muted'>{serverError.first_name[0]}</p>
+          ) : (
+            <></>
+          )}
         </Form.Group>
         <Form.Group className='mb-3'>
           <Form.Label className='text-white'>Last name</Form.Label>
@@ -49,6 +61,11 @@ function CreateUser() {
             placeholder='Last name'
           ></Form.Control>
           <p className='text-white mt-1 text-muted'>{errors.lastName?.message}</p>
+          {serverError && serverError.last_name ? (
+            <p className='text-white mt-1 text-muted'>{serverError.last_name[0]}</p>
+          ) : (
+            <></>
+          )}
         </Form.Group>
         <Button className='m-4' type='submit' variant='success'>
           Create

@@ -1,3 +1,11 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+svg {
+  fill: orange;
+}
+
+svg:hover {
+  fill: orangered;
+}

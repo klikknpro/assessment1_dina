@@ -1,29 +1,31 @@
 import http from 'axios';
 import { AxiosError } from 'axios';
-import { User, CreatedUser } from '../utils/interfaces';
+import { FormError, User } from '../utils/interfaces';
 
-export async function getUser(id: string | undefined) {
-  if (!id) return;
+export async function getUser(id: string | undefined): Promise<User | AxiosError> {
   try {
     const response = await http.get<User>(`https://assessment-users-backend.herokuapp.com/users/${id}.json`);
 
-    return response;
+    return response.data as User;
   } catch (error) {
-    if (http.isAxiosError(error)) alert(error.message);
+    const err = error as AxiosError;
+    return err;
   }
 }
 
-export async function getUsers() {
+export async function getUsers(): Promise<User[] | AxiosError> {
   try {
     const response = await http.get<User[]>('https://assessment-users-backend.herokuapp.com/users.json');
 
-    return response;
+    if (response.data) return response.data as User[];
+    return {} as AxiosError;
   } catch (error) {
-    if (http.isAxiosError(error)) alert(error.message);
+    const err = error as AxiosError;
+    return err;
   }
 }
 
-export async function changeUserStatus(status: string, id: number) {
+export async function changeUserStatus(status: string, id: number): Promise<boolean | AxiosError> {
   try {
     await http.put(`https://assessment-users-backend.herokuapp.com/users/${id}.json`, {
       status: status === 'active' ? 'locked' : 'active',
@@ -34,10 +36,12 @@ export async function changeUserStatus(status: string, id: number) {
     if (response.data.status === 'active') return true;
     return false;
   } catch (error) {
-    if (http.isAxiosError(error)) alert(error.message);
+    const err = error as AxiosError;
+    return err;
   }
 }
-export async function editUserNames(firstName: string, lastName: string, id: string) {
+
+export async function editUserNames(firstName: string, lastName: string, id: string): Promise<User | FormError> {
   try {
     await http.put(`https://assessment-users-backend.herokuapp.com/users/${id}.json`, {
       first_name: firstName,
@@ -46,36 +50,16 @@ export async function editUserNames(firstName: string, lastName: string, id: str
 
     const response = await http.get<User>(`https://assessment-users-backend.herokuapp.com/users/${id}.json`);
 
-    if (response.data !== undefined) return response.data;
+    if (response.data !== undefined) return response.data as User;
+    return {} as FormError;
   } catch (error) {
-    if (http.isAxiosError(error)) alert(error.message);
+    const err = error as AxiosError;
+    return (err.response?.data as FormError) ?? ({} as FormError);
   }
 }
 
-// for NewUser.tsx
-// export async function createUser(firstName: string, lastName: string): Promise<CreatedUser | undefined> {
-//   try {
-//     const response = await http.post(`https://assessment-users-backend.herokuapp.com/users.json`, {
-//       first_name: firstName,
-//       last_name: lastName,
-//       status: 'active',
-//     });
-
-//     if (response.data !== undefined) {
-//       const newUser: CreatedUser = {
-//         firstName: response.data.first_name,
-//         lastName: response.data.last_name,
-//         status: response.data.status,
-//       };
-//       return newUser;
-//     }
-//   } catch (error) {
-//     if (http.isAxiosError(error)) alert(error.message);
-//   }
-// }
-
 // for CreateUser.tsx
-export async function createUser(firstName: string, lastName: string): Promise<User | undefined> {
+export async function createUser(firstName: string, lastName: string): Promise<User | FormError> {
   try {
     const response = await http.post(`https://assessment-users-backend.herokuapp.com/users.json`, {
       first_name: firstName,
@@ -83,8 +67,10 @@ export async function createUser(firstName: string, lastName: string): Promise<U
       status: 'active',
     });
 
-    if (response.data !== undefined) return response.data;
+    if (response.data !== undefined) return response.data as User;
+    return {} as FormError;
   } catch (error) {
-    if (http.isAxiosError(error)) alert(error.message);
+    const err = error as AxiosError;
+    return (err.response?.data as FormError) ?? ({} as FormError);
   }
 }

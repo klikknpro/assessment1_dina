@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User } from '../utils/interfaces';
 import { getUsers } from '../api/diNaUsers';
 import { Col, Container, Row, Button, Spinner } from 'react-bootstrap';
@@ -27,7 +27,8 @@ function Home() {
 
     async function fetchData() {
       const response = await getUsers();
-      if (response && !ignore) setUserList(response.data);
+      // eslint-disable-next-line no-prototype-builtins
+      if (response && !ignore) setUserList(response as User[]);
     }
     fetchData();
 

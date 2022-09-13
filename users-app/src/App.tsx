@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import NewUser from './pages/NewUser';
 import CreateUser from './pages/CreateUser';
-import EditUser from './pages/EditUser';
 import ModifyUser from './pages/ModifyUser';
 import NavMenu from './components/NavMenu';
 

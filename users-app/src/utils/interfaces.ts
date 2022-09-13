@@ -8,13 +8,13 @@ export interface User {
   url?: string;
 }
 
-export interface CreatedUser {
-  firstName?: string | string[];
-  lastName?: string | string[];
-  status?: string | string[];
-}
-
 export interface FormData {
   firstName: string;
   lastName: string;
+}
+
+export interface FormError {
+  first_name?: string[];
+  last_name?: string[];
+  status?: string[];
 }

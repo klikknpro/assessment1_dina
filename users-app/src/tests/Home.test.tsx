@@ -1,6 +1,6 @@
 /* testing utilities */
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 /* api mocking */
 import { setupServer } from 'msw/node';
@@ -22,12 +22,6 @@ describe('elements render on Home', () => {
     await screen.findByLabelText('spinner');
 
     expect(screen.getByLabelText('spinner')).toBeDefined();
-  });
-
-  it('1st page pagination counter should be defined', async () => {
-    await screen.findByText('0 - 10 of 240');
-
-    expect(screen.getByText('0 - 10 of 240')).toBeDefined();
   });
 
   it('Next button should be defined', async () => {

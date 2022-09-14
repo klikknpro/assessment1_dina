@@ -27,7 +27,6 @@ function Home() {
 
     async function fetchData() {
       const response = await getUsers();
-      // eslint-disable-next-line no-prototype-builtins
       if (response && !ignore) setUserList(response as User[]);
     }
     fetchData();

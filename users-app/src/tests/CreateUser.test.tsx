@@ -76,3 +76,27 @@ describe('input validation on Create', () => {
     expect(error).toBeDefined();
   });
 });
+
+describe('successful user creation', () => {
+  beforeEach(() => {
+    render(
+      <BrowserRouter>
+        <CreateUser />
+      </BrowserRouter>,
+    );
+  });
+
+  it('creating a new user should display success message', async () => {
+    const firstName = await screen.findByLabelText('first-name-input');
+    const lastName = await screen.findByLabelText('last-name-input');
+    const button = await screen.findByRole('button', { name: 'Create' });
+
+    await userEvent.type(firstName, 'John Killer');
+    await userEvent.type(lastName, 'Doe');
+    await userEvent.click(button);
+
+    const success = await screen.findByText('Congrats! John Killer Doe has been created.');
+
+    expect(success).toBeDefined();
+  });
+});

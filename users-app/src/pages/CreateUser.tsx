@@ -8,7 +8,6 @@ function CreateUser() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -19,8 +18,6 @@ function CreateUser() {
 
   const [newUser, setNewUser] = useState<User | undefined>(undefined);
   const [serverError, setServerError] = useState<FormError | undefined>(undefined);
-  // watch() re-renders after every keystroke, kinda like a useState() controlled input
-  // const firstName = watch('firstName');
 
   const submit = async (data: FormData) => {
     const freshUser = await createUser(data.firstName, data.lastName);

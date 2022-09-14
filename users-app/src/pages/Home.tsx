@@ -42,7 +42,7 @@ function Home() {
       {userList.length === 0 ? (
         <Row>
           <Col className='d-flex justify-content-center'>
-            <Spinner animation='border' variant='warning' />
+            <Spinner aria-label='spinner' animation='border' variant='warning' />
           </Col>
         </Row>
       ) : (
@@ -60,11 +60,11 @@ function Home() {
                 Previous
               </Button>
             </Col>
-            <Col className='d-flex justify-content-center align-items-center'>
+            <Col aria-label='pagination-counter' className='d-flex justify-content-center align-items-center'>
               {indexOfFirst} - {indexOfFirst + 10} of {userList.length}
             </Col>
             <Col className='d-flex justify-content-start'>
-              <Button variant='outline-warning' onClick={handleNext}>
+              <Button aria-label='next-button' variant='outline-warning' onClick={handleNext}>
                 Next
               </Button>
             </Col>

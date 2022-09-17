@@ -80,7 +80,7 @@ describe('input validation with invalid numbers', () => {
     const input = screen.getByLabelText('input');
     const button = screen.getByRole('button');
 
-    await userEvent.type(input, '9999999991');
+    await userEvent.type(input, '9999999999991');
 
     expect(button).toBeDisabled();
   });

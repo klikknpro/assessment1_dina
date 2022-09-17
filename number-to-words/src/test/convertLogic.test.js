@@ -3,10 +3,7 @@ import convertLogic from '../utils/convertLogic';
 
 describe('logic test with valid numbers', () => {
   it('7 should return "seven"', () => {
-    // given
-    // when
     const result = convertLogic(7);
-    // then
     expect(result).toBe('seven');
   });
 
@@ -58,6 +55,18 @@ describe('logic test with valid numbers', () => {
   it('999999999 should return "nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine"', () => {
     const result = convertLogic(999999999);
     expect(result).toBe('nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine');
+  });
+
+  it('3651010802 should return "three billion six hundred and fifty-one million ten thousand eight hundred and two"', () => {
+    const result = convertLogic(3651010802);
+    expect(result).toBe('three billion six hundred and fifty-one million ten thousand eight hundred and two');
+  });
+
+  it('999999999999 should return "nine hundred and ninety-nine billion nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine"', () => {
+    const result = convertLogic(999999999999);
+    expect(result).toBe(
+      'nine hundred and ninety-nine billion nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine',
+    );
   });
 });
 

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface User {
   id: number;
   last_name: string;
@@ -6,6 +8,17 @@ export interface User {
   created_at: string;
   updated_at: string;
   url?: string;
+}
+
+export interface UserItemProps {
+  id: number;
+  last_name: string;
+  first_name: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  url?: string;
+  handleStatusChange: () => void;
 }
 
 export interface FormData {

@@ -98,7 +98,3 @@ function ModifyUser() {
 }
 
 export default ModifyUser;
-
-/*
-, { required: 'New first name is required' }
-*/

@@ -8,6 +8,12 @@ function Home() {
   const [userList, setUserList] = useState<User[]>([]);
   const [indexOfFirst, setIndexOfFirst] = useState<number>(0);
   const [tenUsers, setTenUsers] = useState<User[]>([]);
+  const [statusChange, setStatusChange] = useState<boolean>(false);
+
+  // handle re-render after one item's status change
+  const handleStatusChange = () => {
+    setStatusChange(!statusChange);
+  };
 
   const handlePrevious = (): void => {
     if (indexOfFirst >= 10) setIndexOfFirst((prevNum: number) => prevNum - 10);
@@ -34,7 +40,7 @@ function Home() {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [statusChange]);
 
   return (
     <Container>
@@ -49,7 +55,7 @@ function Home() {
           <Row xs={1} s={2} md={3} lg={4} className='g-3 mb-3'>
             {tenUsers.map((user) => (
               <Col key={user.id}>
-                <UserItem {...user} />
+                <UserItem {...{ ...user, handleStatusChange }} />
               </Col>
             ))}
           </Row>

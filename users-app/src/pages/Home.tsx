@@ -15,16 +15,18 @@ function Home() {
     setStatusChange(!statusChange);
   };
 
-  const handlePrevious = (): void => {
+  const handlePrevious = () => {
     if (indexOfFirst >= 10) setIndexOfFirst((prevNum: number) => prevNum - 10);
   };
 
-  const handleNext = (): void => {
+  const handleNext = () => {
     if (indexOfFirst + 10 <= userList.length) setIndexOfFirst((prevNum: number) => prevNum + 10);
   };
 
   useEffect(() => {
-    const page = userList.slice(indexOfFirst, indexOfFirst + 10);
+    const page = userList
+      .sort((a: User, b: User) => (a.created_at < b.created_at ? 1 : -1))
+      .slice(indexOfFirst, indexOfFirst + 10);
     setTenUsers(page);
   }, [indexOfFirst, userList]);
 

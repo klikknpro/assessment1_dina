@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import { User, UserItemProps } from '../utils/interfaces';
+import { UserItemProps } from '../utils/interfaces';
 import { changeUserStatus } from '../api/diNaUsers';
 
 function UserItem({ first_name, last_name, created_at, status, id, handleStatusChange }: UserItemProps) {
   const [userStatus, setUserStatus] = useState<boolean>(() => {
-    return status === 'active' ? true : false;
+    return status === 'active';
   });
   const navigate = useNavigate();
 
